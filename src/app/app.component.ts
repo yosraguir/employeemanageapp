@@ -33,16 +33,16 @@ export class AppComponent implements OnInit {
   }
 
   public onAddEmloyee(addForm: NgForm): void {
-    document.getElementById('add-employee-form').click();
+    document.getElementById('add-employee-form').click();//id of button
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
-        addForm.reset();
+        addForm.reset();//restaure les valeurs par défaut des éléments du formulaire.
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        addForm.reset();
+        addForm.reset();// vider le form
       }
     );
   }
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public onDeleteEmloyee(employeeId: number): void {
+  public onDeleteEmployee(employeeId: number){
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
         console.log(response);

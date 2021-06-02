@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <!-- Add Employee Modal -->
+    <!-- Add Employee-->
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -55,24 +55,42 @@
                     <form #addForm="ngForm" (ngSubmit)="onAddEmloyee(addForm)">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" ngModel name="name" class="form-control" placeholder="Name" required>
+                            <input type="text"  name="name" class="form-control" placeholder="Name" required ngModel #name="ngModel">
+                          <span style=color:red *ngIf="!name.valid &&name.touched">
+                            Please enter the name </span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" ngModel name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Email" required ngModel #email="ngModel">
+                          <span style=color:red *ngIf="!email.valid &&email.touched">
+                            Please enter the email </span>
                         </div>
                         <div class="form-group">
                             <label for="phone">Job title</label>
-                            <input type="text" ngModel name="jobTitle" class="form-control" id="jobTile" placeholder="Job title" required>
+                            <input type="text" ngModel name="jobTitle" class="form-control" id="jobTile" placeholder="Job title" required ngModel #jobTitle="ngModel">
+                          <span style=color:red *ngIf="!jobTitle.valid &&jobTitle.touched">
+                            Please enter the jobTitle </span>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" ngModel name="phone" class="form-control" placeholder="Phone" required>
+                            <input type="text" ngModel name="phone" class="form-control" placeholder="Phone" required ngModel #phone="ngModel">
+                          <span style=color:red *ngIf="!phone.valid &&phone.touched">
+                            Please enter the phone </span>
                         </div>
                         <div class="form-group">
                             <label for="phone">Image URL</label>
-                            <input type="text" ngModel name="imageUrl" class="form-control" placeholder="Image URL" required>
+                            <input type="text" ngModel name="imageUrl" class="form-control" placeholder="Image URL" required ngModel #imageUrl="ngModel">
+                          <span style=color:red *ngIf="!imageUrl.valid &&imageUrl.touched">
+                            Please enter Image </span>
                         </div>
+                      <!--<div class="form-group">
+                        <label for="inputState" class="form-label" style="margin-right: 10px;">departement :</label>
+                        <select id="inputState" class="form-select" [(ngModel)]="employee.departement" name="departement" >
+
+                          <option *ngFor=" let departement of departements" [value]="departement.id" >{{departement.name}}</option>
+                        </select>
+                    </div>-->
+
                         <div class="modal-footer">
                             <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
@@ -97,13 +115,22 @@
                     <form #editForm="ngForm">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+                            <input type="text" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder=""
+                                   #name="ngModel" required>
+                          <span style=color:red *ngIf="!name.valid &&(name.touched)">
+                                Please Enter the name
+                          </span>
                         </div>
-                        <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="Email">
-                        <input type="hidden" ngModel="{{editEmployee?.employeeCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
+                        <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="Email"
+                        >
+                        <input type="hidden" ngModel="{{editEmployee?.employeeCode}}" name="userCode" class="form-control" id="userCode" placeholder="">
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+                            <input type="email" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder=""
+                                   #email="ngModel" required>
+                          <span style=color:red *ngIf="!email.valid &&(email.touched)">
+                                Please Enter the email
+                          </span>
                         </div>
                         <div class="form-group">
                             <label for="phone">Job title</label>

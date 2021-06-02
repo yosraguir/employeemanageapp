@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from './employee';
 import { environment } from 'src/environments/environment';
+import {Departement} from './Departement';
 
 @Injectable({providedIn: 'root'})
 export class EmployeeService {
@@ -14,8 +15,8 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${this.apiServerUrl}/employee/all`);
   }
 
-  public addEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiServerUrl}/employee/add`, employee);
+  public addEmployee(employee: Employee , id: number ): Observable<Employee> {
+    return this.http.post<Employee>(`${this.apiServerUrl}/employee/add/${id}`, employee);
   }
 
   public updateEmployee(employee: Employee): Observable<Employee> {
@@ -24,5 +25,8 @@ export class EmployeeService {
 
   public deleteEmployee(employeeId: number): Observable<any> {
     return this.http.delete(`${this.apiServerUrl}/employee/delete/${employeeId}`);
+  }
+  public getDepartement(): Observable<Departement[]> {
+    return this.http.get<Departement[]>(`${this.apiServerUrl}/departement/all`);
   }
 }

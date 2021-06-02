@@ -3,6 +3,7 @@ import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import {Departement} from './Departement';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +12,28 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   public employees: Employee[];
+  public departements : Departement[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
+  employee: Employee;
 
   constructor(private employeeService: EmployeeService){}
 
   ngOnInit() {
     this.getEmployees();
+    this.getdepartements();
   }
-
+  public getdepartements(): void {
+    this.employeeService.getDepartement().subscribe(
+      (response: Departement[]) => {
+        this.departements = response;
+        console.log(this.departements);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
@@ -34,7 +48,7 @@ export class AppComponent implements OnInit {
 
   public onAddEmloyee(addForm: NgForm): void {
     document.getElementById('add-employee-form').click();//id of button
-    this.employeeService.addEmployee(addForm.value).subscribe(
+    this.employeeService.addEmployee(addForm.value, this.employee.id).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();

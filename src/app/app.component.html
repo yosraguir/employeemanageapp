@@ -30,6 +30,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{employee?.email}}</li>
                     <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee?.phone}}</li>
+                  <li class="list-group-item">Departement : {{employee?.departement.name}}</li>
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
@@ -83,13 +84,13 @@
                           <span style=color:red *ngIf="!imageUrl.valid &&imageUrl.touched">
                             Please enter Image </span>
                         </div>
-                      <!--<div class="form-group">
+                      <div class="form-group">
                         <label for="inputState" class="form-label" style="margin-right: 10px;">departement :</label>
-                        <select id="inputState" class="form-select" [(ngModel)]="employee.departement" name="departement" >
+                        <select id="inputState" class="form-select" [(ngModel)]="departementId" name="departementId" >
 
                           <option *ngFor=" let departement of departements" [value]="departement.id" >{{departement.name}}</option>
                         </select>
-                    </div>-->
+                    </div>
 
                         <div class="modal-footer">
                             <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>

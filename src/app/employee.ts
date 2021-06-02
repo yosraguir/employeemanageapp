@@ -8,6 +8,6 @@ export interface Employee{
   phone: string;
   imageUrl: string;
   employeeCode: string;
-  //departement_id: string;
+  //departement_id: number;
   departement : Departement;
 }

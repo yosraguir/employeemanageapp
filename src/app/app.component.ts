@@ -16,13 +16,38 @@ export class AppComponent implements OnInit {
   public editEmployee: Employee;
   public deleteEmployee: Employee;
   employee: Employee;
+  departementId : number;
+  id : number;
+  deb : number;
+  dep : Departement;
 
   constructor(private employeeService: EmployeeService){}
 
   ngOnInit() {
     this.getEmployees();
     this.getdepartements();
+    this.getEmployeeById(39);
+    console.log(this.employee)
+    //this.getDepartementId(this.departementId);
   }
+
+  public getDepartementId( number){
+   this.employeeService.getDepartementId(number).subscribe(
+     (response: Departement) => {
+       this.dep = response;
+       console.log(this.dep);
+     });
+  }
+
+
+  public getEmployeeById( number){
+    this.employeeService.getEmployeeId(number).subscribe(
+      (response: Employee) => {
+       // this.dep = response;
+        console.log(response.departement);
+      });
+  }
+
   public getdepartements(): void {
     this.employeeService.getDepartement().subscribe(
       (response: Departement[]) => {
@@ -38,7 +63,10 @@ export class AppComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
         this.employees = response;
-        console.log(this.employees);
+        //this.getDepartementId(this.employee)
+        this.employees.forEach(res => {
+          console.log(res.departement)
+        })
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -48,7 +76,9 @@ export class AppComponent implements OnInit {
 
   public onAddEmloyee(addForm: NgForm): void {
     document.getElementById('add-employee-form').click();//id of button
-    this.employeeService.addEmployee(addForm.value, this.employee.id).subscribe(
+    this.deb=addForm.value.departementId;
+    //console.log(this.deb);
+    this.employeeService.addEmployee(addForm.value, this.deb).subscribe(
       (response: Employee) => {
         console.log(response);
         this.getEmployees();
